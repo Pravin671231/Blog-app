@@ -16,6 +16,8 @@ app.use(express.json()); //To parse json bodies
 // route
 app.use("/api/posts", postRoutes);
 
+
+
 const PORT = process.env.POR || 5000;
 
 app.listen(PORT, () => {

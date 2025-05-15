@@ -1,11 +1,19 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createPost } from "../services/postServices";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getPostById, updatedPost } from "../services/postServices";
 
-function CreatePost() {
+function EditPost() {
   const [form, setForm] = useState({ title: "", body: "", author: "" });
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function fetchPost() {
+      const res = await getPostById(id);
+      setForm(res.data);
+    }
+    fetchPost();
+  }, [id]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,24 +21,18 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.title || !form.body || !form.author) {
-      return setError("All fields are required");
-    }
-    setError("");
     try {
-        await createPost(form);
-      navigate("/");
+      await updatedPost(id, form);
+      navigate(`/posts/${id}`);
     } catch (err) {
-      setError("Failed to create post", err);
-        console.error(err);
-        
+      console.error("Failed to update post", err);
     }
   };
 
   return (
     <div className="card shadow p-4 ">
-      <h2>Create New Blog Post</h2>
-      {error && <div className="alert alert-danger">{error} </div>}
+      <h2>Edit Post</h2>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Title</label>
@@ -62,12 +64,12 @@ function CreatePost() {
             className="form-control"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Create Post
+        <button type="submit" className="btn btn-success">
+          Update Post
         </button>
       </form>
     </div>
   );
 }
 
-export default CreatePost;
+export default EditPost;
