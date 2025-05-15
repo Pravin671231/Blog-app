@@ -1,9 +1,8 @@
-import axios from "axios"
+import axios from "axios";
 
-const API=axios.create({
-    baseURL:'http://localhost:5000/api'
+const API = axios.create({
+  baseURL: "http://localhost:5000/api",
+});
 
-})
-
-export const getAllPosts=()=>API.get("/posts")
-export const getPostById=()=>API.get(`/posts/${id}`)
+export const getAllPosts = () => API.get("/posts");
+export const getPostById = () => API.get(`/posts/${id}`);
