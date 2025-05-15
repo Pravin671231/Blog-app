@@ -5,4 +5,4 @@ const API = axios.create({
 });
 
 export const getAllPosts = () => API.get("/posts");
-export const getPostById = () => API.get(`/posts/${id}`);
+export const getPostById = (id) => API.get(`/posts/${id}`);
