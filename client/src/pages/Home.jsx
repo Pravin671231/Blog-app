@@ -27,9 +27,9 @@ function Home() {
   return (
     <>
       <h2 className="mb-4">Latest Posts</h2>
-      <div className="row">
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {posts.map((post) => (
-          <div className="col-md-4 mb-3" key={post._id}>
+          <div className="col mb-3" key={post._id}>
             <div className="card h-100 shadow">
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>

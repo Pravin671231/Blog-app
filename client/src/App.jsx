@@ -10,8 +10,10 @@ function App() {
     <>
       <Router>
         <Navbar />
-        <PostRoutes />
-        <ToastContainer  position="top-right" autoClose={3000}/>
+        <div className="container py-4">
+          <PostRoutes />
+          <ToastContainer position="top-right" autoClose={3000} />
+        </div>
       </Router>
     </>
   );
