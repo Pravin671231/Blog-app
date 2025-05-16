@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../services/postServices";
+import { toast } from "react-toastify";
 
 function CreatePost() {
   const [form, setForm] = useState({ title: "", body: "", author: "" });
@@ -14,16 +15,17 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.title || !form.body || !form.author) {
-      return setError("All fields are required");
+      toast.error("All fields are required");
+      return;
     }
     setError("");
     try {
-        await createPost(form);
+      await createPost(form);
+      toast.success("Post created successfully")
       navigate("/");
+
     } catch (err) {
-      setError("Failed to create post", err);
-        console.error(err);
-        
+      toast.error("Failed to create post.");
     }
   };
 

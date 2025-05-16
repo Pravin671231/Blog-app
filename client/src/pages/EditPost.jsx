@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPostById, updatedPost } from "../services/postServices";
+import { getPostById, updatePost } from "../services/postServices";
+import { toast } from "react-toastify";
 
 function EditPost() {
   const [form, setForm] = useState({ title: "", body: "", author: "" });
@@ -22,10 +23,11 @@ function EditPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updatedPost(id, form);
+      await updatePost(id, form);
+      toast.success("Post updated successfully")
       navigate(`/posts/${id}`);
     } catch (err) {
-      console.error("Failed to update post", err);
+      toast.error("Updated Failed");
     }
   };
 

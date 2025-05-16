@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../services/postServices";
+import { toast } from "react-toastify";
 
 function PostDetails() {
   const { id } = useParams();
@@ -33,9 +34,10 @@ function PostDetails() {
     if (confirm) {
       try {
         await deletePost(post._id);
+        toast.success("Post deleted");
         navigate("/");
       } catch (err) {
-        console.error("Failed to delete post:", err);
+        toast.error("Failed to delete post:");
       }
     }
   };
