@@ -21,9 +21,8 @@ function CreatePost() {
     setError("");
     try {
       await createPost(form);
-      toast.success("Post created successfully")
+      toast.success("Post created successfully");
       navigate("/");
-
     } catch (err) {
       toast.error("Failed to create post.");
     }

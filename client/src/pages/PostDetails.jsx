@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPostById } from "../services/postServices";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 function PostDetails() {
   const { id } = useParams();
@@ -24,8 +25,8 @@ function PostDetails() {
     fecthPost();
   }, [id]);
 
-  if (loading) return <p>Loading.....</p>;
-  if (error) return <p className="danger">{error}</p>;
+  if (loading) return <Loader />;
+  if (error) return <div className="alert alert-danger">{error}</div>;
 
   const handleDelete = async () => {
     const confirm = window.confirm(

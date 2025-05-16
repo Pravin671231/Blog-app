@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../services/postServices";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 function Home() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -11,10 +14,15 @@ function Home() {
         setPosts(res.data);
       } catch (error) {
         console.error("Error fetching posts", error);
+      } finally {
+        setLoading(false);
       }
     }
     fecthPosts();
   }, []);
+
+  if (loading) return <Loader />;
+  if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
     <>
