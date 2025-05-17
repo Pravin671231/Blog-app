@@ -4,6 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const postRoutes = require("./routes/postRoutes");
 const authRoutes = require("./routes/authRoutes");
+const blogRoutes=require('./routes/blogRoutes')
 const app = express();
 
 //connect to MongoDB
@@ -16,6 +17,7 @@ app.use(express.json()); //To parse json bodies
 // route
 app.use("/api/posts", postRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/blogs",blogRoutes );
 
 const PORT = process.env.POR || 5000;
 
