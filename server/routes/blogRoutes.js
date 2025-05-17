@@ -3,6 +3,6 @@ const getUserBlogs = require("../controllers/blogControllers");
 const protect = require("../middleware/authMiddleware");
 const router = express.Router();
 
-router.get("/myblogs", getUserBlogs, protect); //Protected
+router.get("/myblogs", protect, getUserBlogs); //Protected
 
 module.exports = router;
